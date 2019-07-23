@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>    
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,height=device-height">
+  <title>test</title>
+  <style>::-webkit-scrollbar{display:none;}html,body{overflow:hidden;height:100%;margin:0;}</style>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- G2 -->
+<script src="js/g2.min.js"></script>
+<!-- Dataset 
+<script src="js/data-set.js"></script>-->
+<!-- jQuery -->
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.min.js"></script>
+
+<div class="float-left" id="video">
+  <img src="images/icons/design.png" alt="sda">
+</div>
+
+<div class="float-right" id="heatmap"></div>
+<script>
+  $.getJSON('heatmap.json', function(data) {
+    var chart = new G2.Chart({
+      container: 'heatmap',
+      forceFit: false,
+      width: 1000,
+      height: 500,
+      padding: [30, 60, 45, 30]
+    });
+    chart.source(data);
+    chart.tooltip({
+      showTitle: false
+    });
+    chart.axis(false);
+    chart.legend({
+      offset: 10
+    });
+    chart.heatmap().position('g*l').color('tmp', '#0000FF-#0033FF-#0066FF-#0099FF-#00CCFF-#00FFFF-#00FFCC-#00FF99-#00FF66-#00FF33-#00FF00-#33FF00-#33FF00-#66FF00-#99FF00-#CCFF00-#33FF00-#FFFF00-#FFCC00-#FF9900-#FF6600-#FF3300-#FF0000');
+    chart.guide().image({
+      start: ['min', 'max'],
+      end: ['max', 'min'],
+      //src: 'https://gw.alipayobjects.com/zos/rmsportal/NeUTMwKtPcPxIFNTWZOZ.png'
+    });
+    chart.render();            
+  });
+</script>
+
+<div class="bottom-div float-left" id="chart"></div>
+<script>
+  var data = [{
+    year: '1951',
+    sales: 38
+  }, {
+    year: '1952',
+    sales: 52
+  }, {
+    year: '1956',
+    sales: 61
+  }, {
+    year: '1957',
+    sales: 145
+  }, {
+    year: '1958',
+    sales: 48
+  }, {
+    year: '1959',
+    sales: 38
+  }, {
+    year: '1960' ,
+    sales: 38
+  }, {
+    year: '1962' ,
+    sales: 38
+  }];
+
+  // for(var i=0;i<data.length;i++)
+  // {
+  //   data[i].xxxx=xxxx;
+  // }
+
+  var chart = new G2.Chart({
+    container: 'chart',
+    forceFit: false,
+    width: 1100,
+    height: 450
+  });
+  chart.source(data);
+  chart.scale('sales', {
+    tickInterval: 20,
+    min: 0
+  });
+  
+  chart.interval().position('year*sales');
+  chart.render();
+  setInterval(function() {
+    data = [data[1],data[2],data[3],data[4],data[5],data[6],data[7],{year:String(Number(data[7].year)+1),sales:data[7].sales+parseInt(Math.random()*(20+10+1)-10,10)}];   
+  chart.changeData(data); 
+}, 1000);//200ms更新一次data
+</script>
+  
+</body>
+
+</html>
