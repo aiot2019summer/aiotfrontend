@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    　<script src="js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<script>
+    var data_1=[];
+    $(function(){
+        //get请求
+        $.ajax({
+            type:'get',
+            url:'http://localhost:3001/123',
+            success:function(data){
+                data_1=data;
+                for(var i=0;i<data.length;i++)
+                {
+                    delete data_1[i]._id;
+                }
+                 console.log(data_1[0]);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        })
+    })
+</script>
+</body>
+</html>
