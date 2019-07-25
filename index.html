@@ -5,105 +5,151 @@
   <meta name="viewport" content="width=device-width,height=device-height">
   <title>test</title>
   <style>::-webkit-scrollbar{display:none;}html,body{overflow:hidden;height:100%;margin:0;}</style>
-  <!-- Bootstrap -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-<!-- G2 -->
 <script src="js/g2.min.js"></script>
-<!-- Dataset 
-<script src="js/data-set.js"></script>-->
-<!-- jQuery -->
 <script src="js/jquery-3.4.1.min.js"></script>
-<!-- Bootstrap JS -->
 <script src="js/bootstrap.min.js"></script>
+<script src="node_modules/mqtt/dist/mqtt.min.js"></script>
+<script src="mqtt_connection.js"></script>
 
-<div class="float-left" id="video">
-  <img src="images/icons/design.png" alt="sda">
-</div>
+<!--左上放视频-->
+<div class="float-left" id="video"></div>
 
-<div class="float-right" id="heatmap"></div>
+<!--右上放热力图-->
+<div class="float-right" id="heatmap" ></div>
 <script>
-  $.getJSON('heatmap.json', function(data) {
+  //声明画图函数heat
+  var count=0;
+  function heat(data) {    
+     
     var chart = new G2.Chart({
-      container: 'heatmap',
-      forceFit: false,
-      width: 1000,
-      height: 500,
-      padding: [30, 60, 45, 30]
-    });
-    chart.source(data);
-    chart.tooltip({
-      showTitle: false
-    });
-    chart.axis(false);
-    chart.legend({
-      offset: 10
-    });
-    chart.heatmap().position('g*l').color('tmp', '#0000FF-#0033FF-#0066FF-#0099FF-#00CCFF-#00FFFF-#00FFCC-#00FF99-#00FF66-#00FF33-#00FF00-#33FF00-#33FF00-#66FF00-#99FF00-#CCFF00-#33FF00-#FFFF00-#FFCC00-#FF9900-#FF6600-#FF3300-#FF0000');
-    chart.guide().image({
-      start: ['min', 'max'],
-      end: ['max', 'min'],
-      //src: 'https://gw.alipayobjects.com/zos/rmsportal/NeUTMwKtPcPxIFNTWZOZ.png'
-    });
-    chart.render();            
+    container: 'heatmap',
+    forceFit: false,
+    width: 1000,
+    height: 500,
+    padding: [30, 60, 45, 30]
   });
+  chart.source(data);
+  chart.tooltip({
+    showTitle: false
+  });
+  chart.axis(false);
+  chart.legend({
+    offset: 10
+  });
+  chart.heatmap().position('g*l').color('tmp', '#0000FF-#0033FF-#0066FF-#0099FF-#00CCFF-#00FFFF-#00FFCC-#00FF99-#00FF66-#00FF33-#00FF00-#33FF00-#33FF00-#66FF00-#99FF00-#CCFF00-#33FF00-#FFFF00-#FFCC00-#FF9900-#FF6600-#FF3300-#FF0000');
+  chart.guide().image({
+    start: ['min', 'max'],
+    end: ['max', 'min'],
+    src: 'hall.jpg'
+  });
+  chart.render();
+    
+  }
+
+//声明密度计算函数change
+  function  change(cars) { 
+    var newList=[]; 
+    var map={};                                   
+    for (var i = 0; i < cars.length; i++){
+       var m=0.1; //图像横轴以m为间隔,纵轴以m为间隔分割成一个个区间
+       var new_data=cars;
+        new_data[i].g=parseInt(cars[i].x/m); //获取x所属区间的行索引
+        new_data[i].l=parseInt(cars[i].y/m);//获取y所属区间的列索引
+    }
+    for (var i = 0; i < new_data.length; i++) {
+      var obj = new_data[i];
+      if ((!(map[obj.g]))&&(!(map[obj.l]))) {
+        newList.push({
+          g: obj.g,
+          l:obj.l,
+          tmp: 1
+        }); 
+      map[obj.g,obj.l] = obj;
+      }//将不重复元素放入obj中
+        else {
+        for (var j = 0; j < newList.length; j++) {
+          if ((newList[j].g == obj.g )&& (newList[j].l==obj.l)) { 
+            newList[j].tmp++;
+            break;
+          }
+        }
+      }
+    }
+    return newList;
+  }
+  var count=0;
+  //实时刷新数据并画图
+  client.on('message', (topic, message) => { 
+    data1=eval("("+message.toString()+")");
+    data2=change(data1);
+    console.log(data2);
+    //将绘图放在client.on外的话会显示不完全（未解决），现为第一次收到数据画图，其他次更新
+    console.log(count);
+    if(count==0){
+      heat(data2);
+    }
+    if(count>0){
+      chart.changeData(data2);
+      chart.repaint();
+    }
+
+  })
 </script>
 
+<!--下面放图表-->
 <div class="bottom-div float-left" id="chart"></div>
 <script>
-  var data = [{
-    year: '1951',
-    sales: 38
-  }, {
-    year: '1952',
-    sales: 52
-  }, {
-    year: '1956',
-    sales: 61
-  }, {
-    year: '1957',
-    sales: 145
-  }, {
-    year: '1958',
-    sales: 48
-  }, {
-    year: '1959',
-    sales: 38
-  }, {
-    year: '1960' ,
-    sales: 38
-  }, {
-    year: '1962' ,
-    sales: 38
-  }];
-
-  // for(var i=0;i<data.length;i++)
-  // {
-  //   data[i].xxxx=xxxx;
-  // }
-
+  var data = [];
   var chart = new G2.Chart({
     container: 'chart',
     forceFit: false,
-    width: 1100,
+    width: 1850,
     height: 450
   });
   chart.source(data);
-  chart.scale('sales', {
+  chart.scale('people', {
     tickInterval: 20,
     min: 0
   });
   
-  chart.interval().position('year*sales');
+  chart.line().position('time*people');
+  chart.point().position('time*people').size(4).shape('circle').style({
+    stroke: '#fff',
+    lineWidth: 1
+  });
   chart.render();
-  setInterval(function() {
-    data = [data[1],data[2],data[3],data[4],data[5],data[6],data[7],{year:String(Number(data[7].year)+1),sales:data[7].sales+parseInt(Math.random()*(20+10+1)-10,10)}];   
-  chart.changeData(data); 
-}, 1000);//200ms更新一次data
+
+  var newdata=[]
+  var count=0;
+  //图表放n列数据
+  var n=5;
+  //接收到新数据后，未满n个时从前往后填充进newdata，超过n个时新数据放newdata最后，newdata数据前移一项，原第一项被挤出
+  client.on('message', (topic, message) => { 
+    data=eval("("+message.toString()+")");
+    var people=data.length-1;
+    
+    data=data.slice(data.length-1,data.length)
+    data[0].people=people;
+    if(count<n+1)
+    {
+      newdata.push(data[0]);
+    }
+    
+    if(count>n)
+    {
+      newdata=newdata.slice(1,n);
+      newdata.push(data[0]);
+    }
+    count++;
+    //console.log(newdata);
+    //重新绘图
+    chart.changeData(newdata);
+  })
 </script>
   
 </body>
