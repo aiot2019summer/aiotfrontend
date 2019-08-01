@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title> Stream Player </title>
+  <script src="/videojs/video.min.js"></script>
+  <link href="/videojs/video-js.min.css" rel="stylesheet">
+</head>
+<body>
+  <video 
+  id="livestream" 
+  class="video-js vjs-default-skin vjs-big-play-centered"
+  controls 
+  autoplay
+  preload="auto" 
+  data-setup='{"techorder" : ["flash"] }'>
+  <source src="rtmp://10.2.1.224/dash" type="rtmp/flv">
+  </video>
+  <script>videojs.options.flash.swf = "/videojs/video-js.swf";</script>
+</body>
+</html>
