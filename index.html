@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,height=device-height">
-  <title>test</title>
+  <!--<meta http-equiv="Refresh" content="1">  页面每1秒刷新一次-->
+  <title>人员密度检测</title>
   <style>
     ::-webkit-scrollbar {
       display: none;
@@ -30,21 +31,24 @@
 
 <!--左上放视频-->
 <div class="top float-left" id="video">
-    <!--<img src="/api/video_feed">-->
+  <img src="/api/video_feed" alt="video">
 </div>
 
 <!--右上放热力图-->
-<div class="top float-right" id="heatmap"></div>
+<div style="background-image:url('hall.jpg'); background-size: 890px 450px;background-repeat: no-repeat; background-position: 50% 32px" class="top float-right" id="heatmap"></div>
 <script>
   function change(data) {
     var newList = [];
     var map = {};
+
     for (var i = 0; i < data.length; i++) {
       var m = 0.001; //图像横轴以m为间隔,纵轴以m为间隔分割成一个个区间
-      var new_data = data;
+      var new_data = data;      
       new_data[i].g = parseInt(data[i].x / m); //获取x所属区间的行索引
       new_data[i].l = parseInt(data[i].y / m);//获取y所属区间的列索引
     }
+  
+
     for (var i = 0; i < new_data.length; i++) {
       var obj = new_data[i];
       if ((!(map[obj.g])) && (!(map[obj.l]))) {
@@ -64,6 +68,7 @@
         }
       }
     }
+
     return newList;
   }
 //因为如没有初始数据就画图，会出现背景位置、大小不对的问题（未解决），现先给一个0值绘图使其正常
@@ -87,10 +92,13 @@
   var chart_1 = new G2.Chart({
       container: 'heatmap',
       forceFit: false,
-      width:950,
+      width: 950,
       height: 500,
-      padding: [30, 30, 60, 30]
+      padding: [30, 30, 33, 30]
     });
+
+  
+  chart_1.coord().reflect();//坐标上下翻转
   chart_1.source(data,defs);
   chart_1.tooltip({
     showTitle: false
@@ -101,20 +109,23 @@
   });
   chart_1.heatmap().position('g*l').color('tmp',
   '#0000FF-#0033FF-#0066FF-#0099FF-#00CCFF-#00FFFF-#00FFCC-#00FF99-#00FF66-#00FF33-#00FF00-#33FF00-#33FF00-#66FF00-#99FF00-#CCFF00-#33FF00-#FFFF00-#FFCC00-#FF9900-#FF6600-#FF3300-#FF0000')
-  .size(60);
-
-  chart_1.guide().image({
-    start: ['min', 'max'],
-    end: ['max', 'min'],
-  src: 'hall.jpg'
-  });
+  .size(30);
+  
   chart_1.render();
   //收到数据后刷新
   client.on('message', (topic, message) => {
-    data1=eval("("+message.toString()+")");
-    data2 = change(data1);
-    console.log(data2);
+    data1_String = message.toString();
+    data1 = data1_String.replace(/'/g,'"');
+    data1 = JSON.parse(data1);
+    if(data1.length>1){
+     data2 = change(data1);
+    }
+    else {
+      data2=[{"g":0,"l":0,"tmp":0}]; 
+      }
+    data2.unshift({"g":-100,"l":-100,"tmp":5});
     chart_1.changeData(data2);
+  
   })
 </script>
 
@@ -125,18 +136,19 @@ var data = [];
   var chart_2= new G2.Chart({
     container: 'area_chart',
     forceFit: false,
-    width: 1850,
+    width: 1000,
     height: 450
   });
   chart_2.source(data);
   chart_2.scale('people', {
-    tickInterval: 10,
-    min: 0
+    tickInterval: 5,
+    min: 0,
+    max: 10
   });
   chart_2.scale('time', {
     tickInterval: 1,
     min: 0,
-    max: 60
+    max: 10
   });
 
   chart_2.tooltip({
@@ -144,41 +156,53 @@ var data = [];
       type: 'line'
     }
   });
-  chart_2.area().position('time*people');
-  chart_2.line().position('time*people').size(2);
-  // chart_2.line().position('time*people');
-  chart_2.point().position('time*people').size(2).shape('circle').style({
-    stroke: '#3300FF',
+  chart_2.area().position('time*people').color('l(100) 0:#a50f15 1:#fee5d9').opacity(0.85);
+  chart_2.line().position('time*people').color("red").size(2);
+  chart_2.point().position('time*people').shape('circle').style({
+    stroke: 'red',
     lineWidth: 2
   });
-  chart_2.axis('xField', {
+  chart_2.axis('time', {
+    label: null,
     line: {
-      lineWidth: 14, // 设置线的宽度
-      stroke: 'black', // 设置线的颜色
-      lineDash: [ 3, 3 ] // 设置虚线样式
+      lineWidth: 3, // 设置线的宽度
+      stroke: 'black', // 设置线的颜色  
+    },
+    tickLine: {
+      lineWidth: 2,
+      length: 10,
+      stroke: 'black',
+      alignWithLabel:true
     }
   });
-
+  chart_2.axis('people', {
+    line: {
+      lineWidth: 3, // 设置线的宽度
+      stroke: 'black', // 设置线的颜色  
+    },
+    tickLine: {
+      lineWidth: 2,
+      length: 10,
+      stroke: 'black',
+      alignWithLabel:true
+    }
+  });
   chart_2.render();
-
 
   //接收到新数据后，push进data
   client.on('message', (topic, message) => {
-    data_temp=eval("("+message.toString()+")");
+    data_String = message.toString();
+    data_temp = data_String.replace(/'/g,'"');
+    data_temp = JSON.parse(data_temp);
     var people = data_temp.length - 1;
     data_temp = data_temp.slice(data_temp.length - 1, data_temp.length)
-
     data_temp[0].people = people;
-
     data.push(data_temp[0]);
-    console.log(data);
 
     //重新绘图
     chart_2.changeData(data);
   })
   
 </script>
-
 </body>
-
 </html>
