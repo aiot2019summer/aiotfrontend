@@ -1,0 +1,282 @@
+html,body{
+    height: 100%;
+    width: 100%;
+}
+.data{
+    width: 100%;
+    height: 100%;
+    background: url('../img/map_bg.png') center;
+   
+}
+/*标题头部*/
+.data>.title{font-size:22px; font-family:"黑体"; color:#fff;max-width:900px;margin:0 auto; height:48px; margin-top:10px;}
+.data>.title>.biaoti{ line-height:48px; display:inline-block;margin:0px; padding:0px; width:276px; text-align:center;font-size:40px;} /*标题格式*/
+                               
+.data>.data-content{
+    width: 100%;
+    height:calc(100% - 105px);
+    padding:0 20px 20px 20px ;
+    box-sizing: border-box;
+}
+.data>.data-content>.con-left{
+    width: 30%;
+    height: 100%;
+    margin-top: 50px;
+}
+.data>.data-content>.con-left>.left-top{
+    width: 100%;
+    height:calc(50% - 20px);
+
+    /*border-radius: 4px;*/
+
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.data>.data-content>.con-left>.left-top>.info-title{
+    width: 158px;
+    height: 35px;
+    background: url('../img/info-title.png') no-repeat;
+    position:relative;
+    top: -22px;
+    left:50%;
+    margin-left: -74px;
+
+    color:#fff;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 43px;
+    text-align: center;
+
+}
+.data>.data-content>.con-left>.left-top>.info-main{
+    width: 100%;
+    height: 80% ;
+    
+}
+.data>.data-content>.con-left>.left-top>.info-main>div{
+    width: 275px;
+    height: 25%;
+    background: url('../img/info-text.png') no-repeat;
+    margin: 8px auto;
+}
+.data>.data-content>.con-left>.left-top>.info-main>div.info-1{
+    margin-top: 5px;
+}
+.data>.data-content>.con-left>.left-top>.info-main>.info-img{
+    width: 100px;
+    height: 60px; 
+    position: relative;
+}
+.data>.data-content>.con-left>.left-top>.info-main> .info-img>img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: 30px;
+    margin-top: -24px;
+    
+}
+.data>.data-content>.con-left>.left-top>.info-main >div.info-text{
+    width: 175px;
+    height: 70px;
+    padding-left:30px;
+    padding-top: 16px;
+    box-sizing: border-box;
+}
+.data>.data-content>.con-left>.left-top>.info-main .info-text>p:nth-child(1){
+    margin-left: 70px;
+    color:#fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+.data>.data-content>.con-left>.left-top>.info-main>.info-1> .info-text>p:nth-child(2){
+    font-weight: 600;
+    margin-left: 70px;
+    color:#25f3e6;
+    font-size: 22px;
+}
+.data>.data-content>.con-left>.left-top>.info-main>.info-2> .info-text>p:nth-child(2){
+    font-weight: 600;
+    margin-left: 70px;
+    color:#ffff44;
+    font-size: 22px;
+}
+.data>.data-content>.con-left>.left-top>.info-main>.info-3> .info-text>p:nth-child(2){
+    font-weight: 600;
+    margin-left: 70px;
+    color:#f84a4a;
+    font-size: 22px;
+}
+.data>.data-content>.con-left>.left-top>.info-main>.info-4> .info-text>p:nth-child(2){
+    font-weight: 600;
+    margin-left: 70px;
+    color:#f5c847;
+    font-size: 22px;
+}
+
+.data>.data-content>.con-left>.top-bottom{
+    height:calc(50% - 20px);
+    width: 100%;
+    background-color: rgba(0,24,106,0.5);
+    margin-top: 20px;
+    border: 1px solid #20558b;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.data>.data-content>.con-center{
+    width: 40%;
+    height: 100%;
+    padding:0 20px;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.data>.data-content>.con-center>.map-num{
+    width:100%;
+    height: 20%;
+    position: relative;
+  
+    left:50px;
+    z-index: 1000;
+}
+.data>.data-content>.con-center>.map-num>p{
+    font-size: 30px;
+    font-weight: 600;
+    color:#fff;
+    text-align:center;
+}
+.data>.data-content>.con-center>.map-num span{
+    display: inline-block;
+    width: 100px;
+    height: 70px;
+    text-align: center;
+    line-height: 65px;
+    background-color: #0089ff;
+    color:#fff;
+    font-size: 50px;
+    font-weight: 600;
+    font-family: "LcdD";
+    margin-top: 15px;
+    margin-left: 40%
+}
+.data>.data-content>.con-center>.map-num span:nth-child(2),
+.data>.data-content>.con-center>.map-num span:nth-child(6){
+    background-color: transparent;
+    width: 30px;
+}
+
+
+
+
+.data>.data-content>.con-center>.cen-bottom{
+    height:70%;
+    width: 100%;
+    background-color: rgba(0,24,106,0.5);
+    margin-top: 40px;
+    border: 1px solid #20558b;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.data>.data-content>.con-right{
+    width: 30%;
+    height: 100%;
+    margin-top: 40px;
+    padding:0 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.data>.data-content>.con-right>.right-top{
+    width: 100%;
+    height:calc(33% - 20px);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.data>.data-content>.con-right>.right-center{
+
+    width: 100%;
+    height:calc(33% - 20px);
+    margin: 20px 0;
+    background-color: rgba(0,24,106,0.5);
+    border: 1px solid #20558b;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.data>.data-content>.con-right>.right-botton{
+
+    width: 100%;
+    height:calc(33% - 20px);
+    margin: 20px 0;
+    background-color: rgba(0,24,106,0.5);
+    border: 1px solid #20558b;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.data>.data-content .title{
+    height: 35px;
+    line-height: 35px;
+    width: 100%;
+    color:#fff;
+    font-weight: 600;
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+.data>.data-content .charts{
+    width: 100%;
+    height:calc(100% - 35px);
+}
+
+.data>.data-content img.bj-1{
+    position: absolute;
+    left:-1px;
+    top:-1px;
+}
+.data>.data-content img.bj-2{
+    position: absolute;
+    right:-1px;
+    top:-1px;
+}
+.data>.data-content img.bj-3{
+    position: absolute;
+    right:-1px;
+    bottom:-1px;
+}
+.data>.data-content img.bj-4{
+    position: absolute;
+    left:-1px;
+    bottom:-1px;
+}
+/*天气*/
+.weather-box {
+    width:100%;
+    height: 50%;
+    align-items: center;
+}
+.weather-box>.data1 {
+    width:100%;
+    height: 100%;
+}
+
+.data1>p {
+    font-size:20px;
+    margin: 0 5px;
+    color: #cdddf7;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.data1>p>span {
+    margin: 0 5px;
+}
+
+.data1>p.time {
+    font-size:25px;
+    height:20px;
+    line-height:20px;
+    margin-top: 10px;
+}
