@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <title>test</title>
+    <style>::-webkit-scrollbar{display:none;}html,body{overflow:hidden;height:100%;margin:0;}</style>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<script src="node_modules/mqtt/dist/mqtt.min.js"></script>
+<!-- G2 -->
+<script src="js/g2.min.js"></script>
+<!-- jQuery -->
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="mqtt_connection.js"></script>
+
+<div id="mountNode"></div>
+<script>
+  $.getJSON('heatmap copy.json', function(data) {
+        //var data=[];
+  var chart = new G2.Chart({
+      container: 'mountNode',
+      forceFit: true,
+      height: window.innerHeight,
+      padding: [0, 30, 60, 30]
+    });
+    chart.source(data);
+    console.log(data[0]);
+    chart.tooltip({
+      showTitle: false
+    });
+    chart.axis(false);
+    chart.legend({
+      offset: 10
+    });
+    chart.heatmap().position('g*l').color('tmp', '#0000FF-#0033FF-#0066FF-#0099FF-#00CCFF-#00FFFF-#00FFCC-#00FF99-#00FF66-#00FF33-#00FF00-#33FF00-#33FF00-#66FF00-#99FF00-#CCFF00-#33FF00-#FFFF00-#FFCC00-#FF9900-#FF6600-#FF3300-#FF0000');
+    chart.guide().image({
+      start: ['min', 'max'],
+      end: ['max', 'min'],
+     src: 'hall.jpg'
+    });
+    chart.render();
+    })
+</script>
+
+</body>
+</html>
