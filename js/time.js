@@ -12,8 +12,17 @@ var timer = setInterval(function () {
     var minute = date.getMinutes(); //分
     var second = date.getSeconds(); //秒
     var day = date.getDay(); //获取当前星期几 
-    var ampm = hours < 12 ? 'am' : 'pm';
+    switch(day){
+        case 1:day="一";break;
+        case 2:day="二";break;
+        case 3:day="三";break;
+        case 4:day="四";break;
+        case 5:day="五";break;
+        case 6:day="六";break;
+        case 7:day="日";break;
+    }
+    var ampm = hours < 12 ? 'AM' : 'PM';
     $('#time').html(fnW(hours) + ":" + fnW(minute) + ":" + fnW(second));
-    $('#date').html('<span>' + year + '/' + (month + 1) + '/' + data + '</span><span>' + ampm + '</span><span>周' + day + '</span>')
+    $('#date').html('<span>' + year + '年' + (month + 1) + '月' + data + '日' + '</span><span>' + ampm + '周' + day )
 
 }, 1000)

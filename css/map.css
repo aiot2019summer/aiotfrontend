@@ -9,7 +9,7 @@ html,body{
    
 }
 /*标题头部*/
-.data>.title{font-size:22px; font-family:"黑体"; color:#fff;max-width:900px;margin:0 auto; height:48px; margin-top:10px;}
+.data>.title{font-size:22px; font-family:"微软雅黑"; color:#fff;max-width:900px;margin:0 auto; height:48px; margin-top:10px;}
 .data>.title>.biaoti{ line-height:48px; display:inline-block;margin:0px; padding:0px; width:276px; text-align:center;font-size:40px;} /*标题格式*/
                                
 .data>.data-content{
@@ -72,7 +72,7 @@ html,body{
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: 30px;
+    margin-left: 50px;
     margin-top: -24px;
     
 }
@@ -82,12 +82,14 @@ html,body{
     padding-left:30px;
     padding-top: 16px;
     box-sizing: border-box;
+    font-family: "微软雅黑"
 }
 .data>.data-content>.con-left>.left-top>.info-main .info-text>p:nth-child(1){
     margin-left: 70px;
     color:#fff;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
+    margin-top: 10px;
 }
 .data>.data-content>.con-left>.left-top>.info-main>.info-1> .info-text>p:nth-child(2){
     font-weight: 600;
@@ -138,7 +140,7 @@ html,body{
     height: 20%;
     position: relative;
   
-    left:50px;
+
     z-index: 1000;
 }
 .data>.data-content>.con-center>.map-num>p{
@@ -153,13 +155,12 @@ html,body{
     height: 70px;
     text-align: center;
     line-height: 65px;
-    background-color: #0089ff;
     color:#fff;
     font-size: 50px;
     font-weight: 600;
-    font-family: "LcdD";
+    font-family: "LcdD"; 
     margin-top: 15px;
-    margin-left: 40%
+    margin-left: 44%
 }
 .data>.data-content>.con-center>.map-num span:nth-child(2),
 .data>.data-content>.con-center>.map-num span:nth-child(6){
@@ -206,7 +207,7 @@ html,body{
     position: relative;
 }
 
-.data>.data-content>.con-right>.right-botton{
+.data>.data-content>.con-right>.right-bottom{
 
     width: 100%;
     height:calc(33% - 20px);
@@ -263,7 +264,7 @@ html,body{
 }
 
 .data1>p {
-    font-size:20px;
+    font-size:30px;
     margin: 0 5px;
     color: #cdddf7;
     text-align: center;
@@ -275,7 +276,7 @@ html,body{
 }
 
 .data1>p.time {
-    font-size:25px;
+    font-size:30px;
     height:20px;
     line-height:20px;
     margin-top: 10px;

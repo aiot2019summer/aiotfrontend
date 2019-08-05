@@ -10,8 +10,26 @@
     <link rel="stylesheet" href="css/map.css">
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/time.js"></script>
+    <script src="js/g2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="node_modules/mqtt/dist/mqtt.min.js"></script>
+    <script src="mqtt_connection.js"></script>
+    <style>
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        html,
+        body {
+          overflow: hidden;
+          height: 100%;
+          margin: 0;
+        }
+      </style>
 </head>
 <body>
+
+
+
 <div  class="data">
     <!--标题-->
      <div class="title">
@@ -33,7 +51,7 @@
                             </div>
                             <div class="info-text fl ">
                                 <p>当前人数(人)   </p>
-                                <p>13   </p>
+                                <p id="CurrentPeople"></p>
                             </div>
                         </div>
                         <div class="info-2">
@@ -42,7 +60,7 @@
                             </div>
                             <div class="info-text fl">
                                 <p>最高人数(人)</p>
-                                <p>13</p>
+                                <p id="HighestNum"></p>
                             </div>
                         </div>
                         <div class="info-3">
@@ -50,31 +68,31 @@
                                 <img src="img/info-img-3.png" alt="">
                             </div>
                             <div class="info-text fl">
-                                <p>增加人数(人)</p>
-                                <p>1</p>
+                                <p>变化人数(人)</p>
+                                <p id="ChangeofNum"></p>
                             </div>
                         </div>
                     
                     </div>
                 </div>
-                <div class="top-bottom">
+                <div class="top-bottom" id="video">
+                    <img src="/api/video_feed" alt="video">
                     <div class="title">实时视频</div>
                     <img src="img/bj-1.png" alt="" class="bj-1">
                     <img src="img/bj-2.png" alt="" class="bj-2">
                     <img src="img/bj-3.png" alt="" class="bj-3">
-                    <img src="img/bj-4.png" alt="" class="bj-4">
-         
+                    <img src="img/bj-4.png" alt="" class="bj-4">         
                 </div>
             </div>
        
         <div class="con-center fl">
             <div class="map-num">
-                <p>当前总人数</p>
-                <div class="num">
-                    <span>13</span>
+                <p font-family:"\5FAE\8F6F\96C5\9ED1" >当前总人数</p>
+                <div class="map-num">
+                    <span id="TotalPeople"></span>
                 </div>
             </div>
-            <div class="cen-bottom">
+            <div style="background-image:url('hall.jpg'); background-size: 800px 450px;background-repeat: no-repeat; background-position: center"class="cen-bottom" id="heatmap">
                 <div class="title">热力图</div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
@@ -93,14 +111,14 @@
                     </div>
                 </div>
             </div>
-            <div class="right-center">
+            <div class="right-center"  id="area_chart">
                     <div class="title">人流统计表</div>
                     <img src="img/bj-1.png" alt="" class="bj-1">
                     <img src="img/bj-2.png" alt="" class="bj-2">
                     <img src="img/bj-3.png" alt="" class="bj-3">
                     <img src="img/bj-4.png" alt="" class="bj-4">
             </div>
-            <div class="right-botton">
+            <div class="right-bottom">
                 <div class="title">实时人流数据</div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
@@ -113,7 +131,9 @@
         </div>
     </div>
 </div>
-
+<script src="heatmap.js"></script>
+<script src="area_chart.js"></script>
+<!--<script src="GetNumOfPeopleMessage.js"></script>-->
 </body>
 
 </html>
