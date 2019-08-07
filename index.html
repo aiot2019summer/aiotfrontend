@@ -51,7 +51,7 @@
                             </div>
                             <div class="info-text fl ">
                                 <p>当前人数(人)   </p>
-                                <p id="CurrentPeople"></p>
+                                <p id="TotalNum_1"></p>
                             </div>
                         </div>
                         <div class="info-2">
@@ -89,7 +89,7 @@
             <div class="map-num">
                 <p font-family:"\5FAE\8F6F\96C5\9ED1" >当前总人数</p>
                 <div class="map-num">
-                    <span id="TotalPeople"></span>
+                    <span id="TotalNum_2"></span>
                 </div>
             </div>
             <div style="background-image:url('hall.jpg'); background-size: 800px 450px;background-repeat: no-repeat; background-position: center"class="cen-bottom" id="heatmap">
@@ -118,8 +118,8 @@
                     <img src="img/bj-3.png" alt="" class="bj-3">
                     <img src="img/bj-4.png" alt="" class="bj-4">
             </div>
-            <div class="right-bottom">
-                <div class="title">实时人流数据</div>
+            <div class="right-bottom" id="donut_chart">
+                <div class="title">人流位置统计</div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
                 <img src="img/bj-3.png" alt="" class="bj-3">
@@ -133,7 +133,7 @@
 </div>
 <script src="heatmap.js"></script>
 <script src="area_chart.js"></script>
-<!--<script src="GetNumOfPeopleMessage.js"></script>-->
+<script src="donut_chart.js"></script>
 </body>
 
 </html>

@@ -33,7 +33,7 @@ function change(data) {
     return newList;
   }
 //因为如没有初始数据就画图，会出现背景位置、大小不对的问题（未解决），现先给一个0值绘图使其正常
-  var data=[{"g":0,"l":0,"tmp":0}];
+  var data_1=[{"g":0,"l":0,"tmp":0}];
   //为了将数据与图片上的位置完全吻合，需要将横轴和纵轴的范围设定为数据对应范围，并将范围优化处理关闭
   var defs = {
     'g': {
@@ -54,13 +54,13 @@ function change(data) {
       container: 'heatmap',
       forceFit: true,
       width:1440,
-      height: 600,
-      padding: [118, 50, 33, 50]
+      height: 518,
+      padding: [34, 0, 33, 0]
     });
 
   
   chart_1.coord().reflect();//坐标上下翻转
-  chart_1.source(data,defs);
+  chart_1.source(data_1,defs);
   chart_1.tooltip({
     showTitle: false
   });
@@ -75,16 +75,16 @@ function change(data) {
   chart_1.render();
   //收到数据后刷新
   client.on('message', (topic, message) => {
-    data1_String = message.toString();
-    data1 = data1_String.replace(/'/g,'"');
-    data1 = JSON.parse(data1);
-    if(data1.length>1){
-     data2 = change(data1);
+    data_1_String = message.toString();
+    data_1 = data_1_String.replace(/'/g,'"');
+    data_1 = JSON.parse(data_1);
+    if(data_1.length>1){
+     data_1 = change(data_1);
     }
     else {
-      data2=[{"g":0,"l":0,"tmp":0}]; 
+      data_1=[{"g":0,"l":0,"tmp":0}]; 
       }
-    data2.unshift({"g":-100,"l":-100,"tmp":5});
-    chart_1.changeData(data2);
+    data_1.unshift({"g":-100,"l":-100,"tmp":7});
+    chart_1.changeData(data_1);
   
   })
