@@ -3,7 +3,7 @@ function change(data) {
     var map = {};
 
     for (var i = 0; i < data.length; i++) {
-      var m = 0.001; //图像横轴以m为间隔,纵轴以m为间隔分割成一个个区间
+      var m = 10; //图像横轴以m为间隔,纵轴以m为间隔分割成一个个区间
       var new_data = data;      
       new_data[i].g = parseInt(data[i].x / m); //获取x所属区间的行索引
       new_data[i].l = parseInt(data[i].y / m);//获取y所属区间的列索引
@@ -69,7 +69,7 @@ function change(data) {
     offset: 10
   });
   chart_1.heatmap().position('g*l').color('tmp',
-  '#0000FF-#0033FF-#0066FF-#0099FF-#00CCFF-#00FFFF-#00FFCC-#00FF99-#00FF66-#00FF33-#00FF00-#33FF00-#33FF00-#66FF00-#99FF00-#CCFF00-#33FF00-#FFFF00-#FFCC00-#FF9900-#FF6600-#FF3300-#FF0000')
+  '#00FFCC-#00FF99-#00FF66-#00FF33-#00FF00-#33FF00-#33FF00-#66FF00-#99FF00-#CCFF00-#33FF00-#FFFF00-#FFCC00-#FF9900-#FF6600-#FF3300-#FF0000')
   .size(30);
   
   chart_1.render();
@@ -85,6 +85,7 @@ function change(data) {
       data_1=[{"g":0,"l":0,"tmp":0}]; 
       }
     data_1.unshift({"g":-100,"l":-100,"tmp":7});
+    data_1.unshift({"g":-200,"l":-100,"tmp":-5});
     chart_1.changeData(data_1);
   
   })
