@@ -22,7 +22,7 @@ var timer = setInterval(function () {
         case 7:day="日";break;
     }
     var ampm = hours < 12 ? 'AM' : 'PM';
-    $('#time').html(fnW(hours) + ":" + fnW(minute) + ":" + fnW(second));
-    $('#date').html('<span>' + year + '年' + (month + 1) + '月' + data + '日' + '</span><span>' + ampm + '周' + day )
+    $('#time').html(fnW(hours) + ":" + fnW(minute) + ":" + fnW(second))+ ampm;
+    $('#date').html('<span>' + year + '年' + (month + 1) + '月' + data + '日' + '</span><span>' +  '周' + day )
 
 }, 1000)

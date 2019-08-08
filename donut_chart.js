@@ -1,16 +1,13 @@
 var data_3 = [{
   position: '食堂',
-  count: 0,
-  percent: 0
+  count: 5,
+  percent: 0.5
   }, {
   position: '大厅',
-  count: 0,
-  percent: 0
-  }, {
-  position: '门口',
-  count: 0,
-  percent: 0
-}];
+  count: 5,
+  percent: 0.5
+  }
+];
 var chart_3 = new G2.Chart({
   container: 'donut_chart',
   forceFit: true,
