@@ -82,7 +82,7 @@ function change(data) {
      data_1 = change(data_1);
     }
     else {
-      data_1=[{"g":0,"l":0,"tmp":0}]; 
+      data_1=[{"g":0,"l":0,"tmp":-5}]; 
       }
     data_1.unshift({"g":-100,"l":-100,"tmp":7});
     data_1.unshift({"g":-200,"l":-100,"tmp":-5});

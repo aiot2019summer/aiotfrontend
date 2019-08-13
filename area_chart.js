@@ -4,7 +4,7 @@ var chart_2= new G2.Chart({
   forceFit: true,
   width: 700,
   height: 350,  
-  padding: [30, 2, 130, 0]
+  padding: [30, 2, 70, 0]
 });
 chart_2.source(data_2);
 chart_2.scale('people', {
@@ -70,7 +70,7 @@ client.on('message', (topic, message) => {
   //顺便更新一下网页上的人数信息
   document.getElementById('TotalNum_1').innerHTML = people;
   document.getElementById('TotalNum_2').innerHTML = people;
-  document.getElementById('TotalNum_3').innerHTML = people;
+ // document.getElementById('TotalNum_4').innerHTML = people;
   document.getElementById('HighestNum').innerHTML = HighestNum;
   if(data_2.length>=2){
     document.getElementById('ChangeofNum').innerHTML = (data_2[data_2.length-1].people)-(data_2[data_2.length-2].people);
