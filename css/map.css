@@ -5,8 +5,16 @@ html,body{
 .data{
     width: 100%;
     height: 100%;
-    background: url('../img/map_bg.png') center;
+
    
+}
+.data canvas {
+    width:100%;
+    height:auto;
+    display:inline-block;
+    vertical-align:baseline;
+    position:absolute;
+    z-index:-1;
 }
 /*标题头部*/
 .data>.title{font-size:22px; font-family:"微软雅黑"; color:#fff;max-width:900px;margin:0 auto; height:48px; margin-top:10px;}
@@ -119,7 +127,8 @@ html,body{
 .data>.data-content>.con-left>.top-bottom{
     height:calc(50% - 20px);
     width: 100%;
-    background-color: rgba(0,24,106,0.5);
+    width: 100%;
+    background-color: rgba(0, 25, 106, 0.781);
     margin-top: 20px;
     border: 1px solid #20558b;
     box-sizing: border-box;
@@ -174,7 +183,7 @@ html,body{
 .data>.data-content>.con-center>.cen-bottom{
     height:70%;
     width: 100%;
-    background-color: rgba(0,24,106,0.5);
+    background-color: rgba(0, 25, 106, 0.781);
     margin-top: 40px;
     border: 1px solid #20558b;
     box-sizing: border-box;
@@ -194,6 +203,7 @@ html,body{
     height:calc(20% - 20px);
     margin-bottom: 20px;
     position: relative;
+    z-index: 99999;
 }
 
 .data>.data-content>.con-right>.right-center{
@@ -201,10 +211,11 @@ html,body{
     width: 100%;
     height:calc(40% - 20px);
     margin: 20px 0;
-    background-color: rgba(0,24,106,0.5);
+    background-color: rgba(0, 25, 106, 0.781);
     border: 1px solid #20558b;
     box-sizing: border-box;
     position: relative;
+    z-index: 99999;
 }
 
 .data>.data-content>.con-right>.right-bottom{
@@ -212,10 +223,11 @@ html,body{
     width: 100%;
     height:calc(40% - 20px);
     margin: 20px 0;
-    background-color: rgba(0,24,106,0.5);
+    background-color:rgba(0, 25, 106, 0.781);
     border: 1px solid #20558b;
     box-sizing: border-box;
     position: relative;
+    z-index: 99999;
 }
 
 .data>.data-content .title{
@@ -338,12 +350,12 @@ html,body{
     color: white;
     font-size: 14px;
     text-align: center;
-    margin-left: 30%;
+    margin-left: 28%;
 }
 
 .box{
     width: 100%;
     height: 80%;
     position: absolute;
-    margin-top:20px;
+
     }

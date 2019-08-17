@@ -1,15 +1,15 @@
 var data_3 = [{
   position: '食堂',
   count: 3,
-  percent: 0.3
+  percent: 0.33
   }, {
   position: '大厅',
-  count: 5,
-  percent: 0.5
+  count: 3,
+  percent: 0.33
   }, {
   position: '门口',
-  count: 2,
-  percent: 0.2
+  count: 3,
+  percent: 0.33
   }
 ];
 var chart_3 = new G2.Chart({
@@ -37,8 +37,7 @@ chart_3.tooltip({
 });
 chart_3.legend({
   offsetY:5,
-  width:50
-  //offsetX:180
+
 });
 
   // 辅助文本
@@ -48,15 +47,7 @@ chart_3.legend({
 //   alignX: 'middle',
 //   alignY: 'middle'
 // });
-var interval = chart_3.intervalStack().position('percent').size(30).color('position',['#13c2c2','#1890ff','#facc14']).label('percent', {
-  formatter: function formatter(val, position) {
-    return position.point.position + ': ' + val;
-  },
-  textStyle: { 
-    fill: 'white', // 文本的颜色
-    fontSize: '16', // 文本大小
-    fontWeight: 'bold', // 文本粗细
-  }}).tooltip('position*percent', function(position, percent) {
+var interval = chart_3.intervalStack().position('percent').size(30).color('position',['#13c2c2','#1890ff','#facc14']).tooltip('position*percent', function(position, percent) {
     percent = percent * 100 + '%';
     return {
     name: position,
@@ -68,45 +59,45 @@ var interval = chart_3.intervalStack().position('percent').size(30).color('posit
 chart_3.render();
 interval.setSelected(data_3[0]);
 
-var cateen_count = 0;
+var canteen_count = 0;
 var hall_count = 0;
 var gate_count = 0;
 //食堂位置
 var canteen_left = 0;
-var canteen_right = 200;
-var canteen_bottom = 200;
-var canteen_top = 0;
+var canteen_right = 250;
+var canteen_bottom = 850;
+var canteen_top = 100;
 // //大厅位置
 // var hall_left = 200;
 // var hall_right = 1280;
 // var hall_bottom = 200;
 // var hall_top = 720;
 //门口位置
-var gate_left = 400;
-var gate_right = 600;
-var gate_bottom = 0;
-var gate_top = 200;
+var gate_left = 320;
+var gate_right = 1200;
+var gate_bottom = 280;
+var gate_top = 0;
 
 client.on('message', (topic, message) => {
   data_3_temp_String = message.toString();
   data_3_temp = data_3_temp_String.replace(/'/g,'"');
   data_3_temp = JSON.parse(data_3_temp);
   for(var i=0;i<data_3_temp.length-1;i++){
-    if((data_3_temp[i].x > canteen_left)&&(data_3_temp[i].x < canteen_right)&&(data_3_temp[i].y > canteen_bottom)&&(data_3_temp[i].y > canteen_top)){
-      cateen_count++;
+    if((data_3_temp[i].x > canteen_left)&&(data_3_temp[i].x < canteen_right)&&(data_3_temp[i].y < canteen_bottom)&&(data_3_temp[i].y > canteen_top)){
+      canteen_count++;
     }
-    // if((data_3_temp[i].x > hall_left)&&(data_3_temp[i].x < hall_right)&&(data_3_temp[i].y > hall_bottom)&&(data_3_temp[i].y > hall_top)){
+    // if((data_3_temp[i].x > hall_left)&&(data_3_temp[i].x < hall_right)&&(data_3_temp[i].y < hall_bottom)&&(data_3_temp[i].y > hall_top)){
     //   hall_count++;
     // }
-    else if((data_3_temp[i].x > gate_left)&&(data_3_temp[i].x < gate_right)&&(data_3_temp[i].y > gate_bottom)&&(data_3_temp[i].y > gate_top)){
+    else if((data_3_temp[i].x > gate_left)&&(data_3_temp[i].x < gate_right)&&(data_3_temp[i].y < gate_bottom)&&(data_3_temp[i].y > gate_top)){
       gate_count++;
     }
     else{
       hall_count++;
     }
   }
-  data_3[0].count = cateen_count;
-  data_3[0].percent = cateen_count/people;
+  data_3[0].count = canteen_count;
+  data_3[0].percent = canteen_count/people;
   data_3[0].percent = (parseInt(data_3[0].percent*100))/100 ;
   
   data_3[1].count = hall_count;
@@ -118,7 +109,7 @@ client.on('message', (topic, message) => {
 
   chart_3.changeData(data_3);
 
-  cateen_count = 0;
+  canteen_count = 0;
   hall_count = 0;
   gate_count = 0;
 })

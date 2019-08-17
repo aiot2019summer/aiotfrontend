@@ -1,21 +1,21 @@
-var data_2 = [];
+var data_2 = [{"time":0,"people":0}];
 var chart_2= new G2.Chart({
   container: 'area_chart',
   forceFit: true,
   width: 700,
   height: 350,  
-  padding: [30, 2, 70, 0]
+  padding: [15, 20, 120, 30]
 });
 chart_2.source(data_2);
 chart_2.scale('people', {
   tickInterval: 5,
   min: 0,
-  max: 20
+  max: 10
 });
 chart_2.scale('time', {
-  tickInterval: 1,
+  tickInterval: 10,
   min: 0,
-  max: 35
+  max: 60
 });
 
 chart_2.tooltip({
@@ -30,26 +30,52 @@ chart_2.line().position('time*people').color("red").size(3);
 
 //时间轴参数
 chart_2.axis('time', {
-  label: null,
   line: {
-    lineWidth: 0.5, // 设置线的宽度
-    stroke: 'black', // 设置线的颜色  
+    lineWidth: 2, // 设置线的宽度
+    stroke: 'white', // 设置线的颜色  
   },
-  tickLine: null
+  subTickCount: 5,
+  subTickLine: {
+    length: 3,
+    stroke: 'white',
+    lineWidth: 1
+  },
+  grid: {
+    type: 'line',
+    lineStyle: {
+      stroke: 'white',
+      lineWidth: 2,
+      lineDash: [ 4, 4 ]
+    }
+  },
+  label:{
+    textStyle:{
+      textAlign: 'center', // 文本对齐方向，可取值为： start middle end
+      fill: '#FFFF', // 文本的颜色
+      fontSize: '20', // 文本大小
+      fontWeight: 'bold', // 文本粗细
+    }
+    
+  } 
 });
 //人数轴参数
 chart_2.axis('people', {
   line: {
-    lineWidth: 0.5, // 设置线的宽度
-    stroke: 'black', // 设置线的颜色  
+    lineWidth: 2, // 设置线的宽度
+    stroke: 'white', // 设置线的颜色  
   },
-  tickLine: {
-    lineWidth: 0.5,
-    length: 10,
-    stroke: 'black',
-    alignWithLabel:true
-  },
-  grid:null
+  tickLine:null,
+ // grid:null,
+  label:{
+    offset:15,
+    textStyle:{
+      textAlign: 'center', // 文本对齐方向，可取值为： start middle end
+      fill: '#FFFF', // 文本的颜色
+      fontSize: '20', // 文本大小
+      fontWeight: 'bold', // 文本粗细
+    }
+    
+  }  
 });
 chart_2.render();
 var HighestNum=0;

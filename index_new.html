@@ -31,6 +31,7 @@
 
 
 <div  class="data">
+        <canvas id="canvas" ></canvas>
     <!--标题-->
      <div class="title">
          <i class="fl"><img src="img/title-left.png" ></i> 
@@ -77,8 +78,8 @@
                 </div>
                 <div class="top-bottom" id="video">
                
-                    <div class="title">实时视频</div>
-                    <img src="/api/video_feed" width="500px" height="300px"  alt="video">
+                    <div style="font-family:Microsoft YaHei;font-size:110%;text-align: center;color: azure;padding-top: 2%;padding-bottom: 2%">实时视频</div>
+                    <img src="/api/video_feed" width="562px" height="352px"  alt="video">
                     <img src="img/bj-1.png" alt="" class="bj-1">
                     <img src="img/bj-2.png" alt="" class="bj-2">
                     <img src="img/bj-3.png" alt="" class="bj-3">
@@ -93,8 +94,8 @@
                     <span id="TotalNum_2"></span>
                 </div>
             </div>
-            <div style="background-image:url('img/heatmap.png'); background-size: 750px 450px;background-repeat: no-repeat; background-position: center"class="cen-bottom" id="heatmap">
-                <div class="title">热力图</div>
+            <div style="background-image:url('img/heatmap.png'); background-size: 750px 450px;background-repeat: no-repeat; background-position: center;z-index: 99999;"class="cen-bottom" id="heatmap">
+                <div style="font-family:Microsoft YaHei;font-size:150%;text-align: center;color: azure;padding-top: 2%;padding-bottom: 2%;z-index: 99999;">热力图</div>
                 <img src="img/bj-1.png" alt="" class="bj-1">
                 <img src="img/bj-2.png" alt="" class="bj-2">
                 <img src="img/bj-3.png" alt="" class="bj-3">
@@ -113,14 +114,14 @@
                 </div>
             </div>
             <div class="right-center"  id="area_chart">
-                    <div class="title">人流统计表</div>
+                    <div style="font-family:Microsoft YaHei;font-size:110%;text-align: center;color: azure;padding-top: 5%;">人流统计表</div>
                     <img src="img/bj-1.png" alt="" class="bj-1">
                     <img src="img/bj-2.png" alt="" class="bj-2">
                     <img src="img/bj-3.png" alt="" class="bj-3">
                     <img src="img/bj-4.png" alt="" class="bj-4">
             </div>
             <div class="right-bottom">
-                <div class="title">人流位置统计</div>
+                <div class="title"></div>
                 <span class="scroll_title">当前人员数量等级</span>
                 <span id="dc")"></span>
                 <div class="box" id="donut_chart"></div>
@@ -134,12 +135,11 @@
          </div>
         </div>
     </div>
+   
 </div>
 <script src="heatmap.js"></script>
 <script src="area_chart.js"></script>
 <script src="donut_chart.js"></script>
 <script src="count.js"></script>
-
-</body>
-
+<script src="background.js"></script>
 </html>
